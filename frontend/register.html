@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | BIDVAULT</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ================================
+           REGISTER PAGE
+        ================================= */
+
+        .auth-page {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 22px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .auth-brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .auth-brand-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 15px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37, #f0d77a);
+            color: #111;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .auth-brand h1 {
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+
+        .auth-brand p {
+            margin-top: 8px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .auth-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.25s ease;
+        }
+
+        .auth-input::placeholder {
+            color: #777;
+        }
+
+        .auth-input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+        }
+
+        /* Role */
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .role-option {
+            position: relative;
+        }
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .role-option label {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #aaa;
+            cursor: pointer;
+            transition: 0.25s ease;
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .role-option label:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            color: #fff;
+        }
+
+        .role-option input:checked + label {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: #d4af37;
+            color: #f0d77a;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            color: #888;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .terms input {
+            margin-top: 3px;
+            accent-color: #d4af37;
+        }
+
+        .terms a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .auth-submit {
+            width: 100%;
+            margin-top: 4px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4af37, #f0d77a);
+            color: #111;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .auth-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #666;
+            font-size: 12px;
+            margin: 3px 0;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .auth-login {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .auth-login a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .auth-login a:hover {
+            color: #f0d77a;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back-home:hover {
+            color: #d4af37;
+        }
+
+        @media (max-width: 500px) {
+            .auth-card {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                BID<span>VAULT</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="auctions.html">Auctions</a>
+                <a href="login.html">Login</a>
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================================
+         REGISTER
+    ================================= -->
+
+    <main class="auth-page">
+
+        <div class="auth-wrapper">
+
+            <div class="auth-card">
+
+                <div class="auth-brand">
+
+                    <div class="auth-brand-icon">
+                        BV
+                    </div>
+
+                    <h1>Create Account</h1>
+
+                    <p>
+                        Join BIDVAULT and start buying or selling today.
+                    </p>
+
+                </div>
+
+
+                <form class="auth-form" id="registerForm">
+
+                    <!-- Full Name -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            class="auth-input"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            class="auth-input"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            class="auth-input"
+                            placeholder="Enter your phone number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Role -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Create Account As
+                        </label>
+
+                        <div class="role-selector">
+
+                            <div class="role-option">
+
+                                <input
+                                    type="radio"
+                                    id="buyer"
+                                    name="role"
+                                    value="buyer"
+                                    checked
+                                >
+
+                                <label for="buyer">
+                                    🛒 Buyer
+                                </label>
+
+                            </div>
+
+                            <div class="role-option">
+
+                                <input
+                                    type="radio"
+                                    id="seller"
+                                    name="role"
+                                    value="seller"
+                                >
+
+                                <label for="seller">
+                                    🏷️ Seller
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="auth-input"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            class="auth-input"
+                            placeholder="Confirm your password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Terms -->
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the
+                            <a href="#">Terms & Conditions</a>
+                            and
+                            <a href="#">Privacy Policy</a>.
+                        </span>
+
+                    </label>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+                        Create BIDVAULT Account →
+                    </button>
+
+
+                    <div class="auth-divider">
+                        OR
+                    </div>
+
+
+                    <!-- Login -->
+
+                    <div class="auth-login">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Login here
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <a href="index.html" class="back-home">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+                const role =
+                    document.querySelector(
+                        'input[name="role"]:checked'
+                    ).value;
+
+
+                /* Check passwords */
+
+                if (password !== confirmPassword) {
+
+                    alert("Passwords do not match.");
+
+                    return;
+                }
+
+
+                /* Frontend demo registration */
+
+                alert(
+                    "Account created successfully as " +
+                    role.toUpperCase() +
+                    "!"
+                );
+
+
+                /* Redirect based on role */
+
+                if (role === "buyer") {
+
+                    window.location.href =
+                        "buyer-dashboard.html";
+
+                } else {
+
+                    window.location.href =
+                        "seller-dashboard.html";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>

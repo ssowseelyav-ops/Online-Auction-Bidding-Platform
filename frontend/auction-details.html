@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Auction | BidVault</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>◆</span> BIDVAULT
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="auctions.html" class="active">Auctions</a>
+        <a href="#">How It Works</a>
+        <a href="#">About</a>
+    </nav>
+
+    <div class="nav-actions">
+        <a href="login.html" class="login-link">Login</a>
+
+        <a href="register.html" class="btn btn-gold">
+            Get Started
+        </a>
+    </div>
+
+</header>
+
+
+<!-- ================= BREADCRUMB ================= -->
+
+<div class="auction-breadcrumb">
+
+    <a href="auctions.html">Auctions</a>
+
+    <span> / </span>
+
+    <span>iPhone 15 Pro</span>
+
+</div>
+
+
+<!-- ================= LIVE AUCTION ================= -->
+
+<main class="live-auction-container">
+
+
+    <!-- LEFT SIDE -->
+
+    <section class="auction-product-section">
+
+        <div class="live-status">
+            <span class="live-dot"></span>
+            LIVE AUCTION
+        </div>
+
+
+        <!-- PRODUCT IMAGE -->
+
+        <div class="main-product-image">
+
+            <div class="large-product">
+                📱
+            </div>
+
+        </div>
+
+
+        <!-- THUMBNAILS -->
+
+        <div class="product-thumbnails">
+
+            <div class="thumbnail active">
+                📱
+            </div>
+
+            <div class="thumbnail">
+                📦
+            </div>
+
+            <div class="thumbnail">
+                🔍
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT DESCRIPTION -->
+
+        <div class="product-description">
+
+            <span class="category">
+                ELECTRONICS
+            </span>
+
+            <h2>
+                iPhone 15 Pro
+            </h2>
+
+            <p>
+                Apple iPhone 15 Pro with advanced camera system,
+                A17 Pro chip and premium titanium design.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- RIGHT SIDE -->
+
+    <section class="auction-panel">
+
+
+        <!-- TITLE -->
+
+        <div class="auction-title-row">
+
+            <div>
+
+                <span class="small-label">
+                    CURRENT AUCTION
+                </span>
+
+                <h1>
+                    iPhone 15 Pro
+                </h1>
+
+            </div>
+
+            <div class="watch-button">
+                ♡
+            </div>
+
+        </div>
+
+
+        <!-- TIMER -->
+
+        <div class="timer-card">
+
+            <div>
+
+                <span>
+                    AUCTION ENDS IN
+                </span>
+
+                <strong id="auctionTimer">
+                    02:34:15
+                </strong>
+
+            </div>
+
+            <div class="timer-icon">
+                ⏱
+            </div>
+
+        </div>
+
+
+        <!-- CURRENT BID -->
+
+        <div class="current-bid-card">
+
+            <div class="bid-heading">
+
+                <span>
+                    CURRENT HIGHEST BID
+                </span>
+
+                <span class="bid-count">
+                    24 BIDS
+                </span>
+
+            </div>
+
+
+            <div class="current-price">
+                ₹72,500
+            </div>
+
+
+            <div class="starting-price">
+
+                Starting price:
+                <strong>₹50,000</strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- PLACE BID -->
+
+        <div class="place-bid-card">
+
+            <div class="bid-label">
+                PLACE YOUR BID
+            </div>
+
+            <div class="minimum-bid">
+                Minimum bid: ₹73,000
+            </div>
+
+
+            <div class="bid-input-row">
+
+                <span>₹</span>
+
+                <input
+                    type="number"
+                    id="bidInput"
+                    placeholder="73,000"
+                >
+
+            </div>
+
+
+            <button
+                class="place-bid-btn"
+                onclick="placeBid()"
+            >
+                PLACE BID
+                <span>→</span>
+            </button>
+
+
+            <p class="bid-note">
+                Your bid must be higher than the current highest bid.
+            </p>
+
+        </div>
+
+
+        <!-- BID ACTIVITY -->
+
+        <div class="bid-activity">
+
+            <div class="activity-header">
+
+                <div>
+                    <span class="small-label">
+                        LIVE ACTIVITY
+                    </span>
+
+                    <h3>
+                        Bid History
+                    </h3>
+                </div>
+
+                <span class="live-text">
+                    ● LIVE
+                </span>
+
+            </div>
+
+
+            <div class="bid-list" id="bidList">
+
+
+                <div class="bid-row">
+
+                    <div class="bid-user">
+
+                        <div class="avatar">
+                            RK
+                        </div>
+
+                        <div>
+                            <strong>Rahul K.</strong>
+                            <small>Just now</small>
+                        </div>
+
+                    </div>
+
+                    <strong class="bid-amount">
+                        ₹72,500
+                    </strong>
+
+                </div>
+
+
+                <div class="bid-row">
+
+                    <div class="bid-user">
+
+                        <div class="avatar">
+                            PS
+                        </div>
+
+                        <div>
+                            <strong>Priya S.</strong>
+                            <small>24 sec ago</small>
+                        </div>
+
+                    </div>
+
+                    <strong class="bid-amount">
+                        ₹71,000
+                    </strong>
+
+                </div>
+
+
+                <div class="bid-row">
+
+                    <div class="bid-user">
+
+                        <div class="avatar">
+                            AM
+                        </div>
+
+                        <div>
+                            <strong>Arjun M.</strong>
+                            <small>48 sec ago</small>
+                        </div>
+
+                    </div>
+
+                    <strong class="bid-amount">
+                        ₹70,000
+                    </strong>
+
+                </div>
+
+
+                <div class="bid-row">
+
+                    <div class="bid-user">
+
+                        <div class="avatar">
+                            SK
+                        </div>
+
+                        <div>
+                            <strong>Sneha K.</strong>
+                            <small>1 min ago</small>
+                        </div>
+
+                    </div>
+
+                    <strong class="bid-amount">
+                        ₹68,500
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= AUCTION INFO ================= -->
+
+<section class="auction-info-section">
+
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            🛡
+        </div>
+
+        <div>
+
+            <h3>
+                Secure Bidding
+            </h3>
+
+            <p>
+                Every bid is securely recorded and validated.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <h3>
+                Real-Time Updates
+            </h3>
+
+            <p>
+                Bid information updates instantly for participants.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            ✓
+        </div>
+
+        <div>
+
+            <h3>
+                Verified Auction
+            </h3>
+
+            <p>
+                Auction details are clearly displayed and tracked.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+        <span>◆</span>
+        BIDVAULT
+    </div>
+
+    <p>
+        © 2026 BidVault. Online Auction & Bidding Platform.
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="js/script.js"></script>
+
+
+<script>
+
+/* =========================
+   AUCTION COUNTDOWN
+========================= */
+
+let auctionTime = (2 * 60 * 60) + (34 * 60) + 15;
+
+function updateAuctionTimer() {
+
+    if (auctionTime <= 0) {
+
+        document.getElementById("auctionTimer").textContent =
+            "AUCTION ENDED";
+
+        return;
+
+    }
+
+    auctionTime--;
+
+    const hours =
+        Math.floor(auctionTime / 3600);
+
+    const minutes =
+        Math.floor((auctionTime % 3600) / 60);
+
+    const seconds =
+        auctionTime % 60;
+
+
+    const formatted =
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+
+    document.getElementById("auctionTimer")
+        .textContent = formatted;
+
+}
+
+setInterval(updateAuctionTimer, 1000);
+
+
+
+/* =========================
+   DEMO BID FUNCTION
+========================= */
+
+function placeBid() {
+
+    const input =
+        document.getElementById("bidInput");
+
+    const amount =
+        Number(input.value);
+
+
+    if (!amount || amount <= 72500) {
+
+        alert(
+            "Please enter a bid higher than ₹72,500."
+        );
+
+        return;
+
+    }
+
+
+    const bidList =
+        document.getElementById("bidList");
+
+
+    const newBid =
+        document.createElement("div");
+
+    newBid.className = "bid-row";
+
+
+    newBid.innerHTML = `
+
+        <div class="bid-user">
+
+            <div class="avatar">
+                YOU
+            </div>
+
+            <div>
+
+                <strong>
+                    You
+                </strong>
+
+                <small>
+                    Just now
+                </small>
+
+            </div>
+
+        </div>
+
+        <strong class="bid-amount">
+            ₹${amount.toLocaleString("en-IN")}
+        </strong>
+
+    `;
+
+
+    bidList.prepend(newBid);
+
+
+    alert(
+        "Bid placed successfully! 🎉"
+    );
+
+
+    input.value = "";
+
+}
+
+</script>
+
+</body>
+
+</html>

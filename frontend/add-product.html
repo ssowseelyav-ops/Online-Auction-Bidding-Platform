@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Auction | BidVault</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>◆</span> BIDVAULT
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="auctions.html">Auctions</a>
+        <a href="#">How It Works</a>
+        <a href="#">About</a>
+    </nav>
+
+    <div class="nav-actions">
+
+        <div class="profile-mini">
+
+            <div class="profile-avatar">
+                AS
+            </div>
+
+            <span>Alex</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= PAGE ================= -->
+
+<main class="create-auction-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="create-header">
+
+        <div>
+
+            <span class="section-label">
+                SELLER CENTER
+            </span>
+
+            <h1>
+                Create New Auction
+            </h1>
+
+            <p>
+                Add your product details and start your auction.
+            </p>
+
+        </div>
+
+        <a
+            href="seller-dashboard.html"
+            class="back-link"
+        >
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- ================= FORM LAYOUT ================= -->
+
+    <div class="create-auction-grid">
+
+
+        <!-- ================= FORM ================= -->
+
+        <section class="form-card">
+
+            <div class="form-card-header">
+
+                <span class="section-label">
+                    PRODUCT INFORMATION
+                </span>
+
+                <h2>
+                    Auction Details
+                </h2>
+
+            </div>
+
+
+            <form id="auctionForm">
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-group">
+
+                    <label for="productName">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="e.g. iPhone 15 Pro"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select id="category" required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option>
+                                Electronics
+                            </option>
+
+                            <option>
+                                Cameras
+                            </option>
+
+                            <option>
+                                Gaming
+                            </option>
+
+                            <option>
+                                Fashion
+                            </option>
+
+                            <option>
+                                Collectibles
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CONDITION -->
+
+                    <div class="form-group">
+
+                        <label for="condition">
+                            Condition
+                        </label>
+
+                        <select id="condition" required>
+
+                            <option value="">
+                                Select condition
+                            </option>
+
+                            <option>
+                                Brand New
+                            </option>
+
+                            <option>
+                                Like New
+                            </option>
+
+                            <option>
+                                Good
+                            </option>
+
+                            <option>
+                                Used
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Product Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        rows="5"
+                        placeholder="Describe your product, features, specifications, etc."
+                        required
+                    ></textarea>
+
+                    <small>
+                        Provide accurate information about the product.
+                    </small>
+
+                </div>
+
+
+                <!-- PRICING -->
+
+                <div class="form-divider">
+
+                    <span>
+                        PRICING
+                    </span>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="startingPrice">
+                            Starting Price
+                        </label>
+
+                        <div class="input-with-symbol">
+
+                            <span>₹</span>
+
+                            <input
+                                type="number"
+                                id="startingPrice"
+                                placeholder="50,000"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="increment">
+                            Minimum Bid Increment
+                        </label>
+
+                        <div class="input-with-symbol">
+
+                            <span>₹</span>
+
+                            <input
+                                type="number"
+                                id="increment"
+                                placeholder="500"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AUCTION SETTINGS -->
+
+                <div class="form-divider">
+
+                    <span>
+                        AUCTION SETTINGS
+                    </span>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="duration">
+                            Auction Duration
+                        </label>
+
+                        <select id="duration" required>
+
+                            <option value="">
+                                Select duration
+                            </option>
+
+                            <option>
+                                1 Hour
+                            </option>
+
+                            <option>
+                                6 Hours
+                            </option>
+
+                            <option>
+                                12 Hours
+                            </option>
+
+                            <option>
+                                24 Hours
+                            </option>
+
+                            <option>
+                                3 Days
+                            </option>
+
+                            <option>
+                                7 Days
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="visibility">
+                            Auction Visibility
+                        </label>
+
+                        <select id="visibility">
+
+                            <option>
+                                Public
+                            </option>
+
+                            <option>
+                                Private
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-divider">
+
+                    <span>
+                        PRODUCT IMAGE
+                    </span>
+
+                </div>
+
+
+                <div class="upload-box">
+
+                    <input
+                        type="file"
+                        id="productImage"
+                        accept="image/*"
+                        hidden
+                    >
+
+                    <label for="productImage">
+
+                        <div class="upload-icon">
+                            ↑
+                        </div>
+
+                        <strong>
+                            Upload Product Image
+                        </strong>
+
+                        <span>
+                            PNG, JPG or WEBP • Max 5MB
+                        </span>
+
+                        <div class="upload-button">
+                            Choose Image
+                        </div>
+
+                    </label>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="seller-dashboard.html"
+                        class="btn btn-outline"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-gold"
+                    >
+                        Create Auction →
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ================= PREVIEW ================= -->
+
+        <aside class="auction-preview">
+
+            <div class="preview-label">
+                LIVE PREVIEW
+            </div>
+
+
+            <div class="preview-card">
+
+                <div class="preview-image">
+
+                    <span class="preview-live">
+                        ● READY TO LIST
+                    </span>
+
+                    <div id="previewEmoji">
+                        📱
+                    </div>
+
+                </div>
+
+
+                <div class="preview-content">
+
+                    <span
+                        class="category"
+                        id="previewCategory"
+                    >
+                        ELECTRONICS
+                    </span>
+
+                    <h2 id="previewName">
+                        iPhone 15 Pro
+                    </h2>
+
+                    <p id="previewDescription">
+                        Your product description will appear here.
+                    </p>
+
+
+                    <div class="preview-price">
+
+                        <div>
+
+                            <small>
+                                Starting Bid
+                            </small>
+
+                            <strong id="previewPrice">
+                                ₹50,000
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Duration
+                            </small>
+
+                            <strong id="previewDuration">
+                                24 Hours
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="preview-button"
+                        type="button"
+                    >
+                        PLACE BID →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TIPS -->
+
+            <div class="seller-tip">
+
+                <div class="tip-icon">
+                    💡
+                </div>
+
+                <div>
+
+                    <strong>
+                        Seller Tip
+                    </strong>
+
+                    <p>
+                        Clear product photos and accurate descriptions
+                        can help attract more bidders.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+        <span>◆</span>
+        BIDVAULT
+    </div>
+
+    <p>
+        © 2026 BidVault. Online Auction & Bidding Platform.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   LIVE PREVIEW
+========================= */
+
+const productName =
+    document.getElementById("productName");
+
+const description =
+    document.getElementById("description");
+
+const category =
+    document.getElementById("category");
+
+const startingPrice =
+    document.getElementById("startingPrice");
+
+const duration =
+    document.getElementById("duration");
+
+
+productName.addEventListener("input", function () {
+
+    document.getElementById("previewName")
+        .textContent =
+        this.value || "iPhone 15 Pro";
+
+});
+
+
+description.addEventListener("input", function () {
+
+    document.getElementById("previewDescription")
+        .textContent =
+        this.value ||
+        "Your product description will appear here.";
+
+});
+
+
+category.addEventListener("change", function () {
+
+    document.getElementById("previewCategory")
+        .textContent =
+        this.value.toUpperCase() || "ELECTRONICS";
+
+});
+
+
+startingPrice.addEventListener("input", function () {
+
+    const value = Number(this.value);
+
+    document.getElementById("previewPrice")
+        .textContent =
+        value
+        ? "₹" + value.toLocaleString("en-IN")
+        : "₹50,000";
+
+});
+
+
+duration.addEventListener("change", function () {
+
+    document.getElementById("previewDuration")
+        .textContent =
+        this.value || "24 Hours";
+
+});
+
+
+/* =========================
+   FORM SUBMISSION
+========================= */
+
+document
+    .getElementById("auctionForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        alert(
+            "Auction created successfully! 🎉"
+        );
+
+        window.location.href =
+            "seller-dashboard.html";
+
+    });
+
+</script>
+
+</body>
+</html>

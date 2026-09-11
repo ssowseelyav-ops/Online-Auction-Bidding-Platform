@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | BIDVAULT</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ================================
+           LOGIN PAGE
+        ================================= */
+
+        .auth-page {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 22px;
+            padding: 42px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .auth-brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .auth-brand-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37, #f0d77a);
+            color: #111;
+            font-size: 25px;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .auth-brand h1 {
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+
+        .auth-brand p {
+            margin-top: 8px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        .auth-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.25s ease;
+        }
+
+        .auth-input::placeholder {
+            color: #777;
+        }
+
+        .auth-input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+        }
+
+        /* Role selection */
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .role-option {
+            position: relative;
+        }
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .role-option label {
+            display: block;
+            text-align: center;
+            padding: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #aaa;
+            cursor: pointer;
+            transition: 0.25s ease;
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .role-option label:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            color: #fff;
+        }
+
+        .role-option input:checked + label {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: #d4af37;
+            color: #f0d77a;
+        }
+
+        .auth-form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            font-size: 13px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            accent-color: #d4af37;
+        }
+
+        .forgot-link {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .forgot-link:hover {
+            color: #f0d77a;
+        }
+
+        .auth-submit {
+            width: 100%;
+            margin-top: 5px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4af37, #f0d77a);
+            color: #111;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .auth-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #666;
+            font-size: 12px;
+            margin: 4px 0;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .auth-register {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .auth-register a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .auth-register a:hover {
+            color: #f0d77a;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .back-home:hover {
+            color: #d4af37;
+        }
+
+        @media (max-width: 500px) {
+            .auth-card {
+                padding: 30px 22px;
+            }
+
+            .auth-form-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                BID<span>VAULT</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="auctions.html">Auctions</a>
+                <a href="login.html" class="active">Login</a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- ================================
+         LOGIN
+    ================================= -->
+
+    <main class="auth-page">
+
+        <div class="auth-wrapper">
+
+            <div class="auth-card">
+
+                <div class="auth-brand">
+
+                    <div class="auth-brand-icon">
+                        BV
+                    </div>
+
+                    <h1>Welcome Back</h1>
+
+                    <p>
+                        Sign in to continue bidding and managing your auctions.
+                    </p>
+
+                </div>
+
+
+                <form class="auth-form" id="loginForm">
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            class="auth-input"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="auth-input"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Role -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Login As
+                        </label>
+
+                        <div class="role-selector">
+
+                            <div class="role-option">
+
+                                <input
+                                    type="radio"
+                                    id="buyer"
+                                    name="role"
+                                    value="buyer"
+                                    checked
+                                >
+
+                                <label for="buyer">
+                                    🛒 Buyer
+                                </label>
+
+                            </div>
+
+                            <div class="role-option">
+
+                                <input
+                                    type="radio"
+                                    id="seller"
+                                    name="role"
+                                    value="seller"
+                                >
+
+                                <label for="seller">
+                                    🏷️ Seller
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Remember / Forgot -->
+
+                    <div class="auth-form-row">
+
+                        <label class="remember-me">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            Remember me
+
+                        </label>
+
+                        <a href="#" class="forgot-link">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+                        Login to BIDVAULT →
+                    </button>
+
+
+                    <div class="auth-divider">
+                        OR
+                    </div>
+
+
+                    <!-- Register -->
+
+                    <div class="auth-register">
+
+                        Don't have an account?
+
+                        <a href="register.html">
+                            Create one
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <a href="index.html" class="back-home">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const role =
+                    document.querySelector(
+                        'input[name="role"]:checked'
+                    ).value;
+
+                /*
+                 * FRONTEND DEMO LOGIN
+                 *
+                 * Backend authentication will be
+                 * connected later.
+                 */
+
+                if (role === "buyer") {
+
+                    window.location.href =
+                        "buyer-dashboard.html";
+
+                } else {
+
+                    window.location.href =
+                        "seller-dashboard.html";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>

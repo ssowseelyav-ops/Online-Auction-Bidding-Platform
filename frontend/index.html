@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BidVault | Online Auction</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">
+        <span>◆</span> BIDVAULT
+    </div>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="auctions.html">Auctions</a>
+        <a href="#">How It Works</a>
+        <a href="#">About</a>
+    </nav>
+
+    <div class="nav-actions">
+        <a href="login.html" class="login-link">Login</a>
+        <a href="register.html" class="btn btn-gold">Get Started</a>
+    </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="live-dot"></span>
+            LIVE AUCTIONS • BID IN REAL TIME
+        </div>
+
+        <h1>
+            Bid Smart.<br>
+            <span>Win More.</span>
+        </h1>
+
+        <p>
+            Discover exclusive products, compete in live auctions,
+            and make every bid count.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="auctions.html" class="btn btn-gold btn-large">
+                Explore Auctions →
+            </a>
+
+            <a href="register.html" class="btn btn-outline btn-large">
+                Start Selling
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <strong>1,250+</strong>
+                <span>Active Bidders</span>
+            </div>
+
+            <div>
+                <strong>340+</strong>
+                <span>Live Auctions</span>
+            </div>
+
+            <div>
+                <strong>₹18L+</strong>
+                <span>Total Bids</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hero-card">
+
+        <div class="auction-badge">
+            <span class="live-dot"></span>
+            LIVE NOW
+        </div>
+
+        <div class="hero-product">
+            <div class="product-placeholder">
+                📱
+            </div>
+        </div>
+
+        <div class="hero-auction-info">
+            <span class="category">ELECTRONICS</span>
+
+            <h3>iPhone 15 Pro</h3>
+
+            <div class="price-row">
+                <div>
+                    <small>Current Bid</small>
+                    <strong>₹72,500</strong>
+                </div>
+
+                <div class="time-box">
+                    <small>Ends In</small>
+                    <strong id="heroTimer">02:34:15</strong>
+                </div>
+            </div>
+
+            <a href="auction-details.html" class="btn btn-gold full-width">
+                View Live Auction →
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LIVE AUCTIONS -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <span class="section-label">DISCOVER</span>
+            <h2>Live Auctions</h2>
+        </div>
+
+        <a href="auctions.html" class="view-all">
+            View All →
+        </a>
+    </div>
+
+
+    <div class="auction-grid">
+
+        <!-- CARD 1 -->
+        <div class="auction-card">
+
+            <div class="card-image">
+                <span class="live-badge">
+                    <span class="live-dot"></span> LIVE
+                </span>
+
+                <div class="product-emoji">📱</div>
+            </div>
+
+            <div class="card-content">
+
+                <span class="category">ELECTRONICS</span>
+
+                <h3>iPhone 15 Pro</h3>
+
+                <div class="card-bottom">
+
+                    <div>
+                        <small>Current Bid</small>
+                        <strong>₹72,500</strong>
+                    </div>
+
+                    <div class="time">
+                        ⏱ 02h 34m
+                    </div>
+
+                </div>
+
+                <a href="auction-details.html" class="card-btn">
+                    View Auction →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+        <div class="auction-card">
+
+            <div class="card-image">
+                <span class="live-badge">
+                    <span class="live-dot"></span> LIVE
+                </span>
+
+                <div class="product-emoji">📷</div>
+            </div>
+
+            <div class="card-content">
+
+                <span class="category">CAMERA</span>
+
+                <h3>Sony Alpha Camera</h3>
+
+                <div class="card-bottom">
+
+                    <div>
+                        <small>Current Bid</small>
+                        <strong>₹35,000</strong>
+                    </div>
+
+                    <div class="time">
+                        ⏱ 01h 18m
+                    </div>
+
+                </div>
+
+                <a href="auction-details.html" class="card-btn">
+                    View Auction →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+        <div class="auction-card">
+
+            <div class="card-image">
+                <span class="live-badge">
+                    <span class="live-dot"></span> LIVE
+                </span>
+
+                <div class="product-emoji">💻</div>
+            </div>
+
+            <div class="card-content">
+
+                <span class="category">GAMING</span>
+
+                <h3>Gaming Laptop</h3>
+
+                <div class="card-bottom">
+
+                    <div>
+                        <small>Current Bid</small>
+                        <strong>₹48,000</strong>
+                    </div>
+
+                    <div class="time">
+                        ⏱ 04h 42m
+                    </div>
+
+                </div>
+
+                <a href="auction-details.html" class="card-btn">
+                    View Auction →
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+
+    <div class="section-heading center">
+        <div>
+            <span class="section-label">SIMPLE PROCESS</span>
+            <h2>How It Works</h2>
+        </div>
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="step-number">01</div>
+            <h3>Discover</h3>
+            <p>Browse products and find auctions that interest you.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">02</div>
+            <h3>Bid</h3>
+            <p>Place competitive bids and watch the auction live.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">03</div>
+            <h3>Win</h3>
+            <p>Become the highest bidder when the auction closes.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="logo">
+        <span>◆</span> BIDVAULT
+    </div>
+
+    <p>© 2026 BidVault. Online Auction & Bidding Platform.</p>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
