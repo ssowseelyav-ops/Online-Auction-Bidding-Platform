@@ -2,562 +2,970 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Buyer Dashboard | BidVault</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>Buyer Dashboard | BIDVAULT</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="css/style.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+
+        /* =====================================
+           BUYER DASHBOARD
+        ===================================== */
+
+        .dashboard-page {
+            padding: 80px 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        .dashboard-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 45px;
+        }
+
+        .dashboard-label {
+            color: #d4af37;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 46px;
+            margin: 0 0 15px;
+        }
+
+        .dashboard-header p {
+            color: #999;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .dashboard-btn {
+            display: inline-block;
+            padding: 16px 25px;
+            background: linear-gradient(
+                135deg,
+                #d4af37,
+                #f0d77a
+            );
+            color: #111;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .dashboard-btn:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================
+           STATS
+        ===================================== */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #111217;
+            border: 1px solid #272930;
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            background: #242327;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .stat-description {
+            color: #777;
+            font-size: 12px;
+        }
+
+
+        /* =====================================
+           CONTENT GRID
+        ===================================== */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns:
+                2fr 1fr;
+            gap: 25px;
+        }
+
+        .dashboard-card {
+            background: #111217;
+            border: 1px solid #272930;
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .card-header a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================
+           ACTIVE BIDS
+        ===================================== */
+
+        .bid-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid #24252b;
+        }
+
+        .bid-item:last-child {
+            border-bottom: none;
+        }
+
+        .bid-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #222328;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .bid-product h3 {
+            margin: 0 0 5px;
+            font-size: 14px;
+        }
+
+        .bid-product p {
+            margin: 0;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .bid-price {
+            text-align: right;
+        }
+
+        .bid-price strong {
+            display: block;
+            color: #f0d77a;
+            font-size: 15px;
+        }
+
+        .bid-price span {
+            color: #777;
+            font-size: 11px;
+        }
+
+
+        /* =====================================
+           STATUS
+        ===================================== */
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 7px;
+        }
+
+        .status-winning {
+            background: rgba(65, 170, 105, 0.12);
+            color: #72d39b;
+        }
+
+        .status-outbid {
+            background: rgba(220, 90, 90, 0.12);
+            color: #ef8585;
+        }
+
+
+        /* =====================================
+           UPDATES
+        ===================================== */
+
+        .update-item {
+            display: flex;
+            gap: 13px;
+            padding: 15px 0;
+            border-bottom: 1px solid #24252b;
+        }
+
+        .update-item:last-child {
+            border-bottom: none;
+        }
+
+        .update-icon {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: #242327;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .update-text p {
+            margin: 0 0 5px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .update-text span {
+            color: #666;
+            font-size: 11px;
+        }
+
+
+        /* =====================================
+           WON AUCTIONS
+        ===================================== */
+
+        .won-section {
+            margin-top: 25px;
+        }
+
+        .won-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .won-item {
+            border: 1px solid #272930;
+            border-radius: 14px;
+            padding: 18px;
+            background: #0d0e12;
+        }
+
+        .won-item .won-icon {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .won-item h3 {
+            font-size: 14px;
+            margin: 0 0 7px;
+        }
+
+        .won-item p {
+            color: #777;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .won-price {
+            color: #d4af37 !important;
+            font-weight: 700;
+            margin-top: 10px !important;
+        }
+
+
+        /* =====================================
+           EMPTY STATE
+        ===================================== */
+
+        .empty-state {
+            text-align: center;
+            padding: 35px 15px;
+            color: #777;
+        }
+
+        .empty-state div {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 1000px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-header h1 {
+                font-size: 34px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .won-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bid-item {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 
-<header class="navbar">
+    <!-- =====================================
+         NAVBAR
+    ===================================== -->
 
-    <div class="logo">
-        <span>◆</span> BIDVAULT
-    </div>
+    <nav class="navbar">
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="auctions.html">Auctions</a>
-        <a href="#">How It Works</a>
-        <a href="#">About</a>
-    </nav>
+        <div class="nav-container">
 
-    <div class="nav-actions">
+            <a href="index.html" class="logo">
+                ◆ BIDVAULT
+            </a>
 
-        <div class="profile-mini">
-            <div class="profile-avatar">
-                AS
-            </div>
 
-            <span>Alex</span>
-        </div>
+            <div class="nav-links">
 
-    </div>
-
-</header>
-
-
-<!-- ================= DASHBOARD ================= -->
-
-<main class="dashboard-container">
-
-    <!-- HEADER -->
-
-    <section class="dashboard-header">
-
-        <div>
-
-            <span class="section-label">
-                BUYER DASHBOARD
-            </span>
-
-            <h1>
-                Welcome back, Alex 👋
-            </h1>
-
-            <p>
-                Track your bids, auctions and winning items.
-            </p>
-
-        </div>
-
-        <a href="auctions.html" class="btn btn-gold">
-            Browse Auctions →
-        </a>
-
-    </section>
-
-
-    <!-- ================= STAT CARDS ================= -->
-
-    <section class="dashboard-stats">
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🔨
-            </div>
-
-            <div>
-
-                <span>
-                    ACTIVE BIDS
-                </span>
-
-                <strong>
-                    5
-                </strong>
-
-                <small>
-                    Currently participating
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🏆
-            </div>
-
-            <div>
-
-                <span>
-                    WON AUCTIONS
-                </span>
-
-                <strong>
-                    2
-                </strong>
-
-                <small>
-                    Successfully won
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🔔
-            </div>
-
-            <div>
-
-                <span>
-                    NOTIFICATIONS
-                </span>
-
-                <strong>
-                    3
-                </strong>
-
-                <small>
-                    New updates
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                💰
-            </div>
-
-            <div>
-
-                <span>
-                    TOTAL SPENT
-                </span>
-
-                <strong>
-                    ₹1.24L
-                </strong>
-
-                <small>
-                    Across completed orders
-                </small>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= MAIN GRID ================= -->
-
-    <section class="dashboard-grid">
-
-
-        <!-- ACTIVE BIDS -->
-
-        <div class="dashboard-card active-bids-card">
-
-            <div class="dashboard-card-header">
-
-                <div>
-
-                    <span class="section-label">
-                        YOUR ACTIVITY
-                    </span>
-
-                    <h2>
-                        Active Bids
-                    </h2>
-
-                </div>
+                <a href="index.html">
+                    Home
+                </a>
 
                 <a href="auctions.html">
-                    View All →
+                    Auctions
+                </a>
+
+                <a href="index.html#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="index.html#about">
+                    About
                 </a>
 
             </div>
 
 
-            <!-- BID ITEM -->
+            <div class="nav-user">
 
-            <div class="dashboard-bid-item">
+                <span class="user-avatar"
+                      id="navAvatar">
+                    U
+                </span>
 
-                <div class="dashboard-product-image">
-                    📱
-                </div>
-
-                <div class="dashboard-product-info">
-
-                    <span class="category">
-                        ELECTRONICS
-                    </span>
-
-                    <h3>
-                        iPhone 15 Pro
-                    </h3>
-
-                    <small>
-                        24 bids • Ends in 02h 34m
-                    </small>
-
-                </div>
-
-                <div class="dashboard-bid-price">
-
-                    <span>
-                        Your Bid
-                    </span>
-
-                    <strong>
-                        ₹72,500
-                    </strong>
-
-                    <em>
-                        You're winning
-                    </em>
-
-                </div>
-
-            </div>
-
-
-            <!-- BID ITEM -->
-
-            <div class="dashboard-bid-item">
-
-                <div class="dashboard-product-image">
-                    📷
-                </div>
-
-                <div class="dashboard-product-info">
-
-                    <span class="category">
-                        CAMERA
-                    </span>
-
-                    <h3>
-                        Sony Alpha Camera
-                    </h3>
-
-                    <small>
-                        18 bids • Ends in 01h 18m
-                    </small>
-
-                </div>
-
-                <div class="dashboard-bid-price">
-
-                    <span>
-                        Your Bid
-                    </span>
-
-                    <strong>
-                        ₹34,000
-                    </strong>
-
-                    <em class="losing">
-                        Outbid
-                    </em>
-
-                </div>
-
-            </div>
-
-
-            <!-- BID ITEM -->
-
-            <div class="dashboard-bid-item">
-
-                <div class="dashboard-product-image">
-                    💻
-                </div>
-
-                <div class="dashboard-product-info">
-
-                    <span class="category">
-                        GAMING
-                    </span>
-
-                    <h3>
-                        Gaming Laptop
-                    </h3>
-
-                    <small>
-                        31 bids • Ends in 04h 42m
-                    </small>
-
-                </div>
-
-                <div class="dashboard-bid-price">
-
-                    <span>
-                        Your Bid
-                    </span>
-
-                    <strong>
-                        ₹47,000
-                    </strong>
-
-                    <em>
-                        You're winning
-                    </em>
-
-                </div>
+                <span id="navUserName">
+                    User
+                </span>
 
             </div>
 
         </div>
 
+    </nav>
 
-        <!-- NOTIFICATIONS -->
 
-        <div class="dashboard-card notification-card">
 
-            <div class="dashboard-card-header">
+    <!-- =====================================
+         DASHBOARD
+    ===================================== -->
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- HEADER -->
+
+            <section class="dashboard-header">
 
                 <div>
 
-                    <span class="section-label">
-                        UPDATES
-                    </span>
+                    <div class="dashboard-label">
+                        BUYER DASHBOARD
+                    </div>
+
+                    <h1>
+                        Welcome back,
+                        <span id="userName">
+                            User
+                        </span>
+                        👋
+                    </h1>
+
+                    <p>
+                        Track your bids, auctions
+                        and winning items.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="auctions.html"
+                    class="dashboard-btn"
+                >
+                    Browse Auctions →
+                </a>
+
+            </section>
+
+
+
+            <!-- =================================
+                 STATS
+            ================================== -->
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔨
+                    </div>
+
+                    <div class="stat-label">
+                        ACTIVE BIDS
+                    </div>
+
+                    <div class="stat-value">
+                        5
+                    </div>
+
+                    <div class="stat-description">
+                        Currently participating
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🏆
+                    </div>
+
+                    <div class="stat-label">
+                        WON AUCTIONS
+                    </div>
+
+                    <div class="stat-value">
+                        2
+                    </div>
+
+                    <div class="stat-description">
+                        Successfully won
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔔
+                    </div>
+
+                    <div class="stat-label">
+                        NOTIFICATIONS
+                    </div>
+
+                    <div class="stat-value">
+                        3
+                    </div>
+
+                    <div class="stat-description">
+                        New updates
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        💰
+                    </div>
+
+                    <div class="stat-label">
+                        TOTAL SPENT
+                    </div>
+
+                    <div class="stat-value">
+                        ₹1.24L
+                    </div>
+
+                    <div class="stat-description">
+                        Across completed orders
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 MAIN CONTENT
+            ================================== -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- ACTIVE BIDS -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Your Active Bids
+                        </h2>
+
+                        <a href="auctions.html">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div class="bid-item">
+
+                        <div class="bid-product">
+
+                            <div class="product-icon">
+                                📱
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    iPhone 15 Pro
+                                </h3>
+
+                                <p>
+                                    Ends in 02h 34m
+                                </p>
+
+                                <span
+                                    class="status status-winning"
+                                >
+                                    WINNING
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="bid-price">
+
+                            <strong>
+                                ₹72,500
+                            </strong>
+
+                            <span>
+                                Your bid
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="bid-item">
+
+                        <div class="bid-product">
+
+                            <div class="product-icon">
+                                📷
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Sony Alpha Camera
+                                </h3>
+
+                                <p>
+                                    Ends in 05h 12m
+                                </p>
+
+                                <span
+                                    class="status status-outbid"
+                                >
+                                    OUTBID
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="bid-price">
+
+                            <strong>
+                                ₹35,000
+                            </strong>
+
+                            <span>
+                                Current bid
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="bid-item">
+
+                        <div class="bid-product">
+
+                            <div class="product-icon">
+                                💻
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Gaming Laptop
+                                </h3>
+
+                                <p>
+                                    Ends in 01h 48m
+                                </p>
+
+                                <span
+                                    class="status status-winning"
+                                >
+                                    WINNING
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="bid-price">
+
+                            <strong>
+                                ₹48,000
+                            </strong>
+
+                            <span>
+                                Your bid
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- UPDATES -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Updates
+                        </h2>
+
+                        <span
+                            style="
+                            color:#d4af37;
+                            font-size:12px;
+                            "
+                        >
+                            3 New
+                        </span>
+
+                    </div>
+
+
+                    <div class="update-item">
+
+                        <div class="update-icon">
+                            🔨
+                        </div>
+
+                        <div class="update-text">
+
+                            <p>
+                                You are currently
+                                winning the iPhone 15 Pro.
+                            </p>
+
+                            <span>
+                                10 minutes ago
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="update-item">
+
+                        <div class="update-icon">
+                            ⚠️
+                        </div>
+
+                        <div class="update-text">
+
+                            <p>
+                                You were outbid on
+                                Sony Alpha Camera.
+                            </p>
+
+                            <span>
+                                25 minutes ago
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="update-item">
+
+                        <div class="update-icon">
+                            🏆
+                        </div>
+
+                        <div class="update-text">
+
+                            <p>
+                                Congratulations!
+                                You won Vintage Watch.
+                            </p>
+
+                            <span>
+                                Yesterday
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 WON AUCTIONS
+            ================================== -->
+
+            <section class="dashboard-card won-section">
+
+                <div class="card-header">
 
                     <h2>
-                        Notifications
+                        Won Auctions
                     </h2>
 
-                </div>
-
-                <span class="notification-count">
-                    3 New
-                </span>
-
-            </div>
-
-
-            <div class="notification-item">
-
-                <div class="notification-icon">
-                    🔥
-                </div>
-
-                <div>
-
-                    <strong>
-                        You are winning!
-                    </strong>
-
-                    <p>
-                        Your bid on iPhone 15 Pro is currently the highest.
-                    </p>
-
-                    <small>
-                        2 minutes ago
-                    </small>
+                    <a href="auctions.html">
+                        Browse More →
+                    </a>
 
                 </div>
 
-            </div>
+
+                <div class="won-grid">
 
 
-            <div class="notification-item">
+                    <div class="won-item">
 
-                <div class="notification-icon">
-                    ⚠️
-                </div>
+                        <div class="won-icon">
+                            ⌚
+                        </div>
 
-                <div>
+                        <h3>
+                            Vintage Watch
+                        </h3>
 
-                    <strong>
-                        You have been outbid
-                    </strong>
+                        <p>
+                            Auction completed
+                        </p>
 
-                    <p>
-                        Someone placed a higher bid on Sony Alpha Camera.
-                    </p>
+                        <p class="won-price">
+                            Won for ₹85,000
+                        </p>
 
-                    <small>
-                        8 minutes ago
-                    </small>
-
-                </div>
-
-            </div>
+                    </div>
 
 
-            <div class="notification-item">
+                    <div class="won-item">
 
-                <div class="notification-icon">
-                    🏆
-                </div>
+                        <div class="won-icon">
+                            🎧
+                        </div>
 
-                <div>
+                        <h3>
+                            Premium Headphones
+                        </h3>
 
-                    <strong>
-                        Auction won!
-                    </strong>
+                        <p>
+                            Auction completed
+                        </p>
 
-                    <p>
-                        You won the Vintage Watch auction.
-                    </p>
+                        <p class="won-price">
+                            Won for ₹18,500
+                        </p>
 
-                    <small>
-                        Yesterday
-                    </small>
+                    </div>
 
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= WON AUCTIONS ================= -->
-
-    <section class="dashboard-card won-auctions">
-
-        <div class="dashboard-card-header">
-
-            <div>
-
-                <span class="section-label">
-                    YOUR WINS
-                </span>
-
-                <h2>
-                    Won Auctions
-                </h2>
-
-            </div>
-
-            <span class="success-label">
-                ✓ 2 Won
-            </span>
-
-        </div>
-
-
-        <div class="won-grid">
-
-
-            <div class="won-item">
-
-                <div class="won-image">
-                    ⌚
-                </div>
-
-                <div>
-
-                    <span class="category">
-                        COLLECTIBLES
-                    </span>
-
-                    <h3>
-                        Vintage Luxury Watch
-                    </h3>
-
-                    <p>
-                        Won for <strong>₹85,000</strong>
-                    </p>
 
                 </div>
 
-                <button class="small-btn">
-                    Pay Now →
-                </button>
-
-            </div>
-
-
-            <div class="won-item">
-
-                <div class="won-image">
-                    🎧
-                </div>
-
-                <div>
-
-                    <span class="category">
-                        ELECTRONICS
-                    </span>
-
-                    <h3>
-                        Premium Headphones
-                    </h3>
-
-                    <p>
-                        Won for <strong>₹12,500</strong>
-                    </p>
-
-                </div>
-
-                <button class="small-btn secondary">
-                    View Order →
-                </button>
-
-            </div>
+            </section>
 
 
         </div>
 
-    </section>
+    </main>
 
 
-</main>
+
+    <!-- =====================================
+         USER NAME SCRIPT
+    ===================================== -->
+
+    <script>
+
+        // Get the registered user's information
+        const savedName =
+            localStorage.getItem("userName");
+
+        const savedRole =
+            localStorage.getItem("userRole");
 
 
-<!-- ================= FOOTER ================= -->
+        // Update dashboard name
+        if (savedName) {
 
-<footer>
+            document.getElementById(
+                "userName"
+            ).textContent = savedName;
 
-    <div class="logo">
-        <span>◆</span>
-        BIDVAULT
-    </div>
 
-    <p>
-        © 2026 BidVault. Online Auction & Bidding Platform.
-    </p>
+            document.getElementById(
+                "navUserName"
+            ).textContent = savedName;
 
-</footer>
+
+            // First letter for avatar
+            document.getElementById(
+                "navAvatar"
+            ).textContent =
+                savedName
+                    .charAt(0)
+                    .toUpperCase();
+
+        }
+
+    </script>
 
 
 </body>
+
 </html>

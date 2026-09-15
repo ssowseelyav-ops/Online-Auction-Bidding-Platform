@@ -2,663 +2,680 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Create Auction | BidVault</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>Add Product | BIDVAULT</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+
+        .add-product-page {
+            min-height: 100vh;
+            padding: 120px 20px 60px;
+        }
+
+        .product-container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .product-header h1 {
+            color: #d4af37;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .product-header p {
+            color: #aaa;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ddd;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+            box-sizing: border-box;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.15);
+
+            background: rgba(255, 255, 255, 0.06);
+
+            color: white;
+
+            font-size: 15px;
+
+            outline: none;
+
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            border-color: #d4af37;
+
+        }
+
+        .form-group select option {
+            background: #171717;
+            color: white;
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #d4af37;
+
+            color: #111;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+
+            display: none;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+        }
+
+        .message.success {
+
+            display: block;
+
+            background:
+                rgba(40, 167, 69, 0.15);
+
+            border:
+                1px solid rgba(40, 167, 69, 0.4);
+
+            color: #6ee786;
+
+        }
+
+        .message.error {
+
+            display: block;
+
+            background:
+                rgba(220, 53, 69, 0.15);
+
+            border:
+                1px solid rgba(220, 53, 69, 0.4);
+
+            color: #ff7b86;
+
+        }
+
+        .back-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #aaa;
+
+            text-decoration: none;
+
+        }
+
+        .back-link:hover {
+            color: #d4af37;
+        }
+
+
+        @media (max-width: 650px) {
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                padding: 25px;
+            }
+
+            .product-header h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 
-<header class="navbar">
+    <div class="add-product-page">
 
-    <div class="logo">
-        <span>◆</span> BIDVAULT
-    </div>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="auctions.html">Auctions</a>
-        <a href="#">How It Works</a>
-        <a href="#">About</a>
-    </nav>
-
-    <div class="nav-actions">
-
-        <div class="profile-mini">
-
-            <div class="profile-avatar">
-                AS
-            </div>
-
-            <span>Alex</span>
-
-        </div>
-
-    </div>
-
-</header>
+        <div class="product-container">
 
 
-<!-- ================= PAGE ================= -->
+            <!-- HEADER -->
 
-<main class="create-auction-container">
+            <div class="product-header">
 
+                <h1>
+                    Create Your Auction
+                </h1>
 
-    <!-- PAGE HEADER -->
-
-    <div class="create-header">
-
-        <div>
-
-            <span class="section-label">
-                SELLER CENTER
-            </span>
-
-            <h1>
-                Create New Auction
-            </h1>
-
-            <p>
-                Add your product details and start your auction.
-            </p>
-
-        </div>
-
-        <a
-            href="seller-dashboard.html"
-            class="back-link"
-        >
-            ← Back to Dashboard
-        </a>
-
-    </div>
-
-
-    <!-- ================= FORM LAYOUT ================= -->
-
-    <div class="create-auction-grid">
-
-
-        <!-- ================= FORM ================= -->
-
-        <section class="form-card">
-
-            <div class="form-card-header">
-
-                <span class="section-label">
-                    PRODUCT INFORMATION
-                </span>
-
-                <h2>
-                    Auction Details
-                </h2>
+                <p>
+                    Add a product and get it ready
+                    for bidding.
+                </p>
 
             </div>
 
 
-            <form id="auctionForm">
+
+            <!-- CARD -->
+
+            <div class="product-card">
 
 
-                <!-- PRODUCT NAME -->
+                <!-- MESSAGE -->
 
-                <div class="form-group">
-
-                    <label for="productName">
-                        Product Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="productName"
-                        placeholder="e.g. iPhone 15 Pro"
-                        required
-                    >
-
-                </div>
+                <div
+                    id="message"
+                    class="message"
+                ></div>
 
 
-                <!-- CATEGORY -->
 
-                <div class="form-row">
+                <!-- FORM -->
+
+                <form id="productForm">
+
+
+                    <!-- PRODUCT NAME -->
 
                     <div class="form-group">
 
-                        <label for="category">
-                            Category
+                        <label for="name">
+                            Product Name *
                         </label>
 
-                        <select id="category" required>
-
-                            <option value="">
-                                Select category
-                            </option>
-
-                            <option>
-                                Electronics
-                            </option>
-
-                            <option>
-                                Cameras
-                            </option>
-
-                            <option>
-                                Gaming
-                            </option>
-
-                            <option>
-                                Fashion
-                            </option>
-
-                            <option>
-                                Collectibles
-                            </option>
-
-                            <option>
-                                Other
-                            </option>
-
-                        </select>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter product name"
+                            required
+                        >
 
                     </div>
 
 
-                    <!-- CONDITION -->
 
-                    <div class="form-group">
+                    <!-- CATEGORY + CONDITION -->
 
-                        <label for="condition">
-                            Condition
-                        </label>
-
-                        <select id="condition" required>
-
-                            <option value="">
-                                Select condition
-                            </option>
-
-                            <option>
-                                Brand New
-                            </option>
-
-                            <option>
-                                Like New
-                            </option>
-
-                            <option>
-                                Good
-                            </option>
-
-                            <option>
-                                Used
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
+                    <div class="form-row">
 
 
-                <!-- DESCRIPTION -->
+                        <div class="form-group">
 
-                <div class="form-group">
+                            <label for="category">
+                                Category
+                            </label>
 
-                    <label for="description">
-                        Product Description
-                    </label>
+                            <select id="category">
 
-                    <textarea
-                        id="description"
-                        rows="5"
-                        placeholder="Describe your product, features, specifications, etc."
-                        required
-                    ></textarea>
+                                <option value="">
+                                    Select Category
+                                </option>
 
-                    <small>
-                        Provide accurate information about the product.
-                    </small>
+                                <option value="Electronics">
+                                    Electronics
+                                </option>
 
-                </div>
+                                <option value="Fashion">
+                                    Fashion
+                                </option>
 
+                                <option value="Art">
+                                    Art
+                                </option>
 
-                <!-- PRICING -->
+                                <option value="Jewellery">
+                                    Jewellery
+                                </option>
 
-                <div class="form-divider">
+                                <option value="Collectibles">
+                                    Collectibles
+                                </option>
 
-                    <span>
-                        PRICING
-                    </span>
+                                <option value="Vehicles">
+                                    Vehicles
+                                </option>
 
-                </div>
+                                <option value="Other">
+                                    Other
+                                </option>
 
-
-                <div class="form-row">
-
-                    <div class="form-group">
-
-                        <label for="startingPrice">
-                            Starting Price
-                        </label>
-
-                        <div class="input-with-symbol">
-
-                            <span>₹</span>
-
-                            <input
-                                type="number"
-                                id="startingPrice"
-                                placeholder="50,000"
-                                required
-                            >
+                            </select>
 
                         </div>
 
-                    </div>
 
 
-                    <div class="form-group">
+                        <div class="form-group">
 
-                        <label for="increment">
-                            Minimum Bid Increment
-                        </label>
+                            <label for="condition">
+                                Condition
+                            </label>
 
-                        <div class="input-with-symbol">
+                            <select id="condition">
 
-                            <span>₹</span>
+                                <option value="">
+                                    Select Condition
+                                </option>
 
-                            <input
-                                type="number"
-                                id="increment"
-                                placeholder="500"
-                                required
-                            >
+                                <option value="New">
+                                    New
+                                </option>
+
+                                <option value="Like New">
+                                    Like New
+                                </option>
+
+                                <option value="Good">
+                                    Good
+                                </option>
+
+                                <option value="Used">
+                                    Used
+                                </option>
+
+                            </select>
 
                         </div>
 
+
                     </div>
 
-                </div>
 
 
-                <!-- AUCTION SETTINGS -->
-
-                <div class="form-divider">
-
-                    <span>
-                        AUCTION SETTINGS
-                    </span>
-
-                </div>
-
-
-                <div class="form-row">
+                    <!-- DESCRIPTION -->
 
                     <div class="form-group">
 
-                        <label for="duration">
-                            Auction Duration
+                        <label for="description">
+                            Description
                         </label>
 
-                        <select id="duration" required>
-
-                            <option value="">
-                                Select duration
-                            </option>
-
-                            <option>
-                                1 Hour
-                            </option>
-
-                            <option>
-                                6 Hours
-                            </option>
-
-                            <option>
-                                12 Hours
-                            </option>
-
-                            <option>
-                                24 Hours
-                            </option>
-
-                            <option>
-                                3 Days
-                            </option>
-
-                            <option>
-                                7 Days
-                            </option>
-
-                        </select>
+                        <textarea
+                            id="description"
+                            placeholder="Describe your product..."
+                        ></textarea>
 
                     </div>
 
+
+
+                    <!-- IMAGE URL -->
 
                     <div class="form-group">
 
-                        <label for="visibility">
-                            Auction Visibility
+                        <label for="imageUrl">
+                            Image URL
                         </label>
 
-                        <select id="visibility">
-
-                            <option>
-                                Public
-                            </option>
-
-                            <option>
-                                Private
-                            </option>
-
-                        </select>
+                        <input
+                            type="url"
+                            id="imageUrl"
+                            placeholder="https://example.com/image.jpg"
+                        >
 
                     </div>
 
-                </div>
 
 
-                <!-- IMAGE -->
-
-                <div class="form-divider">
-
-                    <span>
-                        PRODUCT IMAGE
-                    </span>
-
-                </div>
-
-
-                <div class="upload-box">
-
-                    <input
-                        type="file"
-                        id="productImage"
-                        accept="image/*"
-                        hidden
-                    >
-
-                    <label for="productImage">
-
-                        <div class="upload-icon">
-                            ↑
-                        </div>
-
-                        <strong>
-                            Upload Product Image
-                        </strong>
-
-                        <span>
-                            PNG, JPG or WEBP • Max 5MB
-                        </span>
-
-                        <div class="upload-button">
-                            Choose Image
-                        </div>
-
-                    </label>
-
-                </div>
-
-
-                <!-- BUTTONS -->
-
-                <div class="form-actions">
-
-                    <a
-                        href="seller-dashboard.html"
-                        class="btn btn-outline"
-                    >
-                        Cancel
-                    </a>
+                    <!-- SUBMIT -->
 
                     <button
                         type="submit"
-                        class="btn btn-gold"
+                        class="submit-btn"
+                        id="submitButton"
                     >
-                        Create Auction →
+                        Add Product
                     </button>
 
-                </div>
 
-
-            </form>
-
-        </section>
+                </form>
 
 
 
-        <!-- ================= PREVIEW ================= -->
+                <a
+                    href="seller-dashboard.html"
+                    class="back-link"
+                >
+                    ← Back to Seller Dashboard
+                </a>
 
-        <aside class="auction-preview">
-
-            <div class="preview-label">
-                LIVE PREVIEW
-            </div>
-
-
-            <div class="preview-card">
-
-                <div class="preview-image">
-
-                    <span class="preview-live">
-                        ● READY TO LIST
-                    </span>
-
-                    <div id="previewEmoji">
-                        📱
-                    </div>
-
-                </div>
-
-
-                <div class="preview-content">
-
-                    <span
-                        class="category"
-                        id="previewCategory"
-                    >
-                        ELECTRONICS
-                    </span>
-
-                    <h2 id="previewName">
-                        iPhone 15 Pro
-                    </h2>
-
-                    <p id="previewDescription">
-                        Your product description will appear here.
-                    </p>
-
-
-                    <div class="preview-price">
-
-                        <div>
-
-                            <small>
-                                Starting Bid
-                            </small>
-
-                            <strong id="previewPrice">
-                                ₹50,000
-                            </strong>
-
-                        </div>
-
-                        <div>
-
-                            <small>
-                                Duration
-                            </small>
-
-                            <strong id="previewDuration">
-                                24 Hours
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="preview-button"
-                        type="button"
-                    >
-                        PLACE BID →
-                    </button>
-
-                </div>
 
             </div>
 
-
-            <!-- TIPS -->
-
-            <div class="seller-tip">
-
-                <div class="tip-icon">
-                    💡
-                </div>
-
-                <div>
-
-                    <strong>
-                        Seller Tip
-                    </strong>
-
-                    <p>
-                        Clear product photos and accurate descriptions
-                        can help attract more bidders.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </aside>
-
+        </div>
 
     </div>
 
-</main>
 
 
-<!-- ================= FOOTER ================= -->
+    <script>
 
-<footer>
+        const productForm =
+            document.getElementById(
+                "productForm"
+            );
 
-    <div class="logo">
-        <span>◆</span>
-        BIDVAULT
-    </div>
+        const message =
+            document.getElementById(
+                "message"
+            );
 
-    <p>
-        © 2026 BidVault. Online Auction & Bidding Platform.
-    </p>
-
-</footer>
-
-
-<script>
-
-/* =========================
-   LIVE PREVIEW
-========================= */
-
-const productName =
-    document.getElementById("productName");
-
-const description =
-    document.getElementById("description");
-
-const category =
-    document.getElementById("category");
-
-const startingPrice =
-    document.getElementById("startingPrice");
-
-const duration =
-    document.getElementById("duration");
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
 
 
-productName.addEventListener("input", function () {
+        // ========================================
+        // CHECK SELLER LOGIN
+        // ========================================
 
-    document.getElementById("previewName")
-        .textContent =
-        this.value || "iPhone 15 Pro";
+        const sellerId =
+            localStorage.getItem(
+                "userId"
+            );
 
-});
-
-
-description.addEventListener("input", function () {
-
-    document.getElementById("previewDescription")
-        .textContent =
-        this.value ||
-        "Your product description will appear here.";
-
-});
+        const userRole =
+            localStorage.getItem(
+                "userRole"
+            );
 
 
-category.addEventListener("change", function () {
+        if (!sellerId || userRole !== "SELLER") {
 
-    document.getElementById("previewCategory")
-        .textContent =
-        this.value.toUpperCase() || "ELECTRONICS";
+            alert(
+                "Please login as a seller first."
+            );
 
-});
+            window.location.href =
+                "login.html";
 
-
-startingPrice.addEventListener("input", function () {
-
-    const value = Number(this.value);
-
-    document.getElementById("previewPrice")
-        .textContent =
-        value
-        ? "₹" + value.toLocaleString("en-IN")
-        : "₹50,000";
-
-});
+        }
 
 
-duration.addEventListener("change", function () {
 
-    document.getElementById("previewDuration")
-        .textContent =
-        this.value || "24 Hours";
+        // ========================================
+        // SUBMIT PRODUCT
+        // ========================================
 
-});
+        productForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
 
 
-/* =========================
-   FORM SUBMISSION
-========================= */
+                // Get values
 
-document
-    .getElementById("auctionForm")
-    .addEventListener("submit", function(event) {
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
 
-        event.preventDefault();
+                const category =
+                    document
+                        .getElementById("category")
+                        .value;
 
-        alert(
-            "Auction created successfully! 🎉"
+                const description =
+                    document
+                        .getElementById("description")
+                        .value
+                        .trim();
+
+                const productCondition =
+                    document
+                        .getElementById("condition")
+                        .value;
+
+                const imageUrl =
+                    document
+                        .getElementById("imageUrl")
+                        .value
+                        .trim();
+
+
+                // Clear message
+
+                message.className =
+                    "message";
+
+                message.textContent =
+                    "";
+
+
+                // Disable button
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "Adding Product...";
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/products",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        seller_id:
+                                            sellerId,
+
+                                        name:
+                                            name,
+
+                                        category:
+                                            category,
+
+                                        description:
+                                            description,
+
+                                        product_condition:
+                                            productCondition,
+
+                                        image_url:
+                                            imageUrl
+
+                                    })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    // =================================
+                    // ERROR
+                    // =================================
+
+                    if (!response.ok) {
+
+                        message.className =
+                            "message error";
+
+                        message.textContent =
+                            data.message ||
+                            "Failed to add product";
+
+                        submitButton.disabled =
+                            false;
+
+                        submitButton.textContent =
+                            "Add Product";
+
+                        return;
+
+                    }
+
+
+                    // =================================
+                    // SUCCESS
+                    // =================================
+
+                    message.className =
+                        "message success";
+
+                    message.textContent =
+                        "Product added successfully!";
+
+
+                    // Clear form
+
+                    productForm.reset();
+
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "Add Product";
+
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Product error:",
+                        error
+                    );
+
+
+                    message.className =
+                        "message error";
+
+                    message.textContent =
+                        "Cannot connect to server.";
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "Add Product";
+
+                }
+
+            }
         );
 
-        window.location.href =
-            "seller-dashboard.html";
+    </script>
 
-    });
-
-</script>
 
 </body>
+
 </html>

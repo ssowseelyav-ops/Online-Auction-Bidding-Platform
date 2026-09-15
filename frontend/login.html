@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,490 +10,427 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* ================================
-           LOGIN PAGE
-        ================================= */
-
-        .auth-page {
-            min-height: calc(100vh - 80px);
+        body {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px 20px;
         }
 
-        .auth-wrapper {
+        .login-container {
             width: 100%;
             max-width: 460px;
+            padding: 20px;
         }
 
-        .auth-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(212, 175, 55, 0.18);
-            border-radius: 22px;
-            padding: 42px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .auth-brand {
+        .login-logo {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
-        .auth-brand-icon {
-            width: 58px;
-            height: 58px;
-            margin: 0 auto 16px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #d4af37, #f0d77a);
-            color: #111;
-            font-size: 25px;
-            font-weight: 800;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        .login-logo h1 {
+            color: #d4af37;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
-        .auth-brand h1 {
-            margin: 0;
-            font-size: 30px;
-            letter-spacing: 1px;
-        }
-
-        .auth-brand p {
-            margin-top: 8px;
-            color: #999;
+        .login-logo p {
+            color: #aaa;
             font-size: 14px;
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #ddd;
-        }
-
-        .auth-input {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 14px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            font-size: 14px;
-            outline: none;
-            transition: 0.25s ease;
-        }
-
-        .auth-input::placeholder {
-            color: #777;
-        }
-
-        .auth-input:focus {
-            border-color: #d4af37;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
-        }
-
-        /* Role selection */
-
-        .role-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .role-option {
-            position: relative;
-        }
-
-        .role-option input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .role-option label {
             display: block;
-            text-align: center;
-            padding: 13px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #aaa;
-            cursor: pointer;
-            transition: 0.25s ease;
-            background: rgba(255, 255, 255, 0.025);
+            margin-bottom: 8px;
+            color: #ddd;
+            font-size: 14px;
         }
 
-        .role-option label:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            color: #fff;
-        }
-
-        .role-option input:checked + label {
-            background: rgba(212, 175, 55, 0.12);
-            border-color: #d4af37;
-            color: #f0d77a;
-        }
-
-        .auth-form-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            font-size: 13px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #999;
-            cursor: pointer;
-        }
-
-        .remember-me input {
-            accent-color: #d4af37;
-        }
-
-        .forgot-link {
-            color: #d4af37;
-            text-decoration: none;
-        }
-
-        .forgot-link:hover {
-            color: #f0d77a;
-        }
-
-        .auth-submit {
+        .form-group input {
             width: 100%;
-            margin-top: 5px;
-            padding: 15px;
+            padding: 13px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            color: white;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #d4af37;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
             border: none;
             border-radius: 10px;
-            background: linear-gradient(135deg, #d4af37, #f0d77a);
+            background: #d4af37;
             color: #111;
-            font-size: 15px;
-            font-weight: 800;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: 0.25s ease;
+            margin-top: 5px;
         }
 
-        .auth-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
+        .login-btn:hover {
+            opacity: 0.9;
         }
 
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #666;
-            font-size: 12px;
-            margin: 4px 0;
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
-        .auth-divider::before,
-        .auth-divider::after {
-            content: "";
-            height: 1px;
-            flex: 1;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .auth-register {
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             text-align: center;
-            color: #999;
             font-size: 14px;
-            margin-top: 4px;
         }
 
-        .auth-register a {
+        .message.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.15);
+            border: 1px solid rgba(220, 53, 69, 0.4);
+            color: #ff7b86;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(40, 167, 69, 0.15);
+            border: 1px solid rgba(40, 167, 69, 0.4);
+            color: #6ee786;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .register-link a {
             color: #d4af37;
             text-decoration: none;
-            font-weight: 700;
-        }
-
-        .auth-register a:hover {
-            color: #f0d77a;
         }
 
         .back-home {
             display: block;
             text-align: center;
-            margin-top: 22px;
-            color: #777;
+            margin-top: 15px;
+            color: #888;
             text-decoration: none;
             font-size: 13px;
-            transition: 0.2s;
         }
 
         .back-home:hover {
             color: #d4af37;
         }
-
-        @media (max-width: 500px) {
-            .auth-card {
-                padding: 30px 22px;
-            }
-
-            .auth-form-row {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
 
+
 <body>
 
-    <!-- ================================
-         NAVBAR
-    ================================= -->
+    <div class="login-container">
 
-    <nav class="navbar">
-        <div class="nav-container">
+        <div class="login-card">
 
-            <a href="index.html" class="logo">
-                BID<span>VAULT</span>
-            </a>
+            <div class="login-logo">
 
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="auctions.html">Auctions</a>
-                <a href="login.html" class="active">Login</a>
+                <h1>BIDVAULT</h1>
+
+                <p>Welcome back to the auction.</p>
+
             </div>
 
-        </div>
-    </nav>
+
+            <!-- Message -->
+
+            <div id="message" class="message"></div>
 
 
-    <!-- ================================
-         LOGIN
-    ================================= -->
+            <!-- Login Form -->
 
-    <main class="auth-page">
+            <form id="loginForm">
 
-        <div class="auth-wrapper">
+                <div class="form-group">
 
-            <div class="auth-card">
+                    <label for="email">
+                        Email Address
+                    </label>
 
-                <div class="auth-brand">
-
-                    <div class="auth-brand-icon">
-                        BV
-                    </div>
-
-                    <h1>Welcome Back</h1>
-
-                    <p>
-                        Sign in to continue bidding and managing your auctions.
-                    </p>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
 
                 </div>
 
 
-                <form class="auth-form" id="loginForm">
+                <div class="form-group">
 
-                    <!-- Email -->
+                    <label for="password">
+                        Password
+                    </label>
 
-                    <div class="form-group">
-
-                        <label for="email">
-                            Email Address
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            class="auth-input"
-                            placeholder="Enter your email"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- Password -->
-
-                    <div class="form-group">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-                        <input
-                            type="password"
-                            id="password"
-                            class="auth-input"
-                            placeholder="Enter your password"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- Role -->
-
-                    <div class="form-group">
-
-                        <label>
-                            Login As
-                        </label>
-
-                        <div class="role-selector">
-
-                            <div class="role-option">
-
-                                <input
-                                    type="radio"
-                                    id="buyer"
-                                    name="role"
-                                    value="buyer"
-                                    checked
-                                >
-
-                                <label for="buyer">
-                                    🛒 Buyer
-                                </label>
-
-                            </div>
-
-                            <div class="role-option">
-
-                                <input
-                                    type="radio"
-                                    id="seller"
-                                    name="role"
-                                    value="seller"
-                                >
-
-                                <label for="seller">
-                                    🏷️ Seller
-                                </label>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Remember / Forgot -->
-
-                    <div class="auth-form-row">
-
-                        <label class="remember-me">
-
-                            <input
-                                type="checkbox"
-                                id="remember"
-                            >
-
-                            Remember me
-
-                        </label>
-
-                        <a href="#" class="forgot-link">
-                            Forgot password?
-                        </a>
-
-                    </div>
-
-
-                    <!-- Submit -->
-
-                    <button
-                        type="submit"
-                        class="auth-submit"
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
                     >
-                        Login to BIDVAULT →
-                    </button>
+
+                </div>
 
 
-                    <div class="auth-divider">
-                        OR
-                    </div>
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginButton"
+                >
+                    Login
+                </button>
+
+            </form>
 
 
-                    <!-- Register -->
+            <div class="register-link">
 
-                    <div class="auth-register">
+                Don't have an account?
 
-                        Don't have an account?
-
-                        <a href="register.html">
-                            Create one
-                        </a>
-
-                    </div>
-
-                </form>
+                <a href="register.html">
+                    Create Account
+                </a>
 
             </div>
 
 
-            <a href="index.html" class="back-home">
+            <a
+                href="index.html"
+                class="back-home"
+            >
                 ← Back to Home
             </a>
 
         </div>
 
-    </main>
+    </div>
 
 
-    <!-- ================================
-         JAVASCRIPT
-    ================================= -->
 
     <script>
 
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", function(event) {
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const message =
+            document.getElementById("message");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
 
                 event.preventDefault();
 
-                const role =
-                    document.querySelector(
-                        'input[name="role"]:checked'
-                    ).value;
 
-                /*
-                 * FRONTEND DEMO LOGIN
-                 *
-                 * Backend authentication will be
-                 * connected later.
-                 */
+                // Get form values
 
-                if (role === "buyer") {
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
 
-                    window.location.href =
-                        "buyer-dashboard.html";
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
 
-                } else {
 
-                    window.location.href =
-                        "seller-dashboard.html";
+                // Clear old message
+
+                message.className =
+                    "message";
+
+                message.textContent =
+                    "";
+
+
+                // Disable button
+
+                loginButton.disabled = true;
+
+                loginButton.textContent =
+                    "Logging in...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/users/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    // Login failed
+
+                    if (!response.ok) {
+
+                        message.className =
+                            "message error";
+
+                        message.textContent =
+                            data.message ||
+                            "Login failed";
+
+                        loginButton.disabled =
+                            false;
+
+                        loginButton.textContent =
+                            "Login";
+
+                        return;
+                    }
+
+
+                    // =================================
+                    // LOGIN SUCCESSFUL
+                    // =================================
+
+                    message.className =
+                        "message success";
+
+                    message.textContent =
+                        "Login successful!";
+
+
+                    // Get user information
+
+                    const user =
+                        data.user;
+
+
+                    // Save user information
+
+                    localStorage.setItem(
+                        "userId",
+                        user.userId
+                    );
+
+                    localStorage.setItem(
+                        "userName",
+                        user.name
+                    );
+
+                    localStorage.setItem(
+                        "userEmail",
+                        user.email
+                    );
+
+                    localStorage.setItem(
+                        "userRole",
+                        user.role
+                    );
+
+
+                    // =================================
+                    // REDIRECT BASED ON ROLE
+                    // =================================
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                user.role ===
+                                "SELLER"
+                            ) {
+
+                                window.location.href =
+                                    "seller-dashboard.html";
+
+                            }
+                            else {
+
+                                window.location.href =
+                                    "buyer-dashboard.html";
+
+                            }
+
+                        },
+                        700
+                    );
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    message.className =
+                        "message error";
+
+                    message.textContent =
+                        "Cannot connect to server. Make sure the backend is running.";
+
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
 
                 }
 
-            });
+            }
+        );
 
     </script>
 
 </body>
+
 </html>
