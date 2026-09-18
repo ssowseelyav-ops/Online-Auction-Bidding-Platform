@@ -5,7 +5,8 @@ const db = require("./config/database");
 
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
-
+const auctionRoutes = require("./routes/auctionRoutes");
+const bidRoutes = require("./routes/bidRoutes");
 
 const app = express();
 
@@ -43,6 +44,23 @@ app.use(
     userRoutes
 );
 
+// ========================================
+// AUCTION ROUTES
+// ========================================
+
+app.use(
+    "/api/auctions",
+    auctionRoutes
+);
+
+// ========================================
+// BID ROUTES
+// ========================================
+
+app.use(
+    "/api/bids",
+    bidRoutes
+);
 
 // ========================================
 // PRODUCT ROUTES
