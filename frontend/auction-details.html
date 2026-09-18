@@ -462,60 +462,202 @@
 
 <script src="js/script.js"></script>
 
-
 <script>
 
 /* =========================
-   AUCTION COUNTDOWN
+   AUCTION DETAILS
 ========================= */
 
-let auctionTime = (2 * 60 * 60) + (34 * 60) + 15;
-
-function updateAuctionTimer() {
-
-    if (auctionTime <= 0) {
-
-        document.getElementById("auctionTimer").textContent =
-            "AUCTION ENDED";
-
-        return;
-
-    }
-
-    auctionTime--;
-
-    const hours =
-        Math.floor(auctionTime / 3600);
-
-    const minutes =
-        Math.floor((auctionTime % 3600) / 60);
-
-    const seconds =
-        auctionTime % 60;
-
-
-    const formatted =
-        String(hours).padStart(2, "0") +
-        ":" +
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0");
-
-
-    document.getElementById("auctionTimer")
-        .textContent = formatted;
-
-}
-
-setInterval(updateAuctionTimer, 1000);
-
+const urlParams = new URLSearchParams(window.location.search);
+const auctionId = urlParams.get("id");
 
 
 /* =========================
-   DEMO BID FUNCTION
+   LOAD AUCTION
 ========================= */
 
-function placeBid() {
+async function loadAuction() {
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/auctions/${auctionId}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Failed to load auction.");
+            return;
+        }
+
+        const auction = data.auction;
+
+        document.querySelectorAll("h1").forEach(function (element) {
+            if (element.textContent.includes("iPhone 15 Pro")) {
+                element.textContent = auction.product_name;
+            }
+        });
+
+        document.querySelectorAll("h2").forEach(function (element) {
+            if (element.textContent.includes("iPhone 15 Pro")) {
+                element.textContent = auction.product_name;
+            }
+        });
+
+        const category = document.querySelector(".category");
+
+        if (category) {
+            category.textContent = auction.category.toUpperCase();
+        }
+
+        const description =
+            document.querySelector(".product-description p");
+
+        if (description) {
+            description.textContent = auction.description;
+        }
+
+        const currentPrice =
+            document.querySelector(".current-price");
+
+        if (currentPrice) {
+            currentPrice.textContent =
+                "₹" +
+                Number(auction.current_price)
+                    .toLocaleString("en-IN");
+        }
+
+        const startingPrice =
+            document.querySelector(".starting-price strong");
+
+        if (startingPrice) {
+            startingPrice.textContent =
+                "₹" +
+                Number(auction.starting_price)
+                    .toLocaleString("en-IN");
+        }
+
+        const minimumBid =
+            document.querySelector(".minimum-bid");
+
+        if (minimumBid) {
+            minimumBid.textContent =
+                "Minimum bid: ₹" +
+                (
+                    Number(auction.current_price) + 1
+                ).toLocaleString("en-IN");
+        }
+
+        const bidInput =
+            document.getElementById("bidInput");
+
+        if (bidInput) {
+            bidInput.placeholder =
+                (
+                    Number(auction.current_price) + 1
+                ).toLocaleString("en-IN");
+        }
+
+        window.currentAuctionPrice =
+            Number(auction.current_price);
+
+        loadBids();
+
+    } catch (error) {
+
+        console.error("Auction loading error:", error);
+
+        alert(
+            "Cannot connect to backend. Make sure the backend is running."
+        );
+    }
+}
+
+
+/* =========================
+   LOAD BID HISTORY
+========================= */
+
+async function loadBids() {
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/bids/auction/${auctionId}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return;
+        }
+
+        const bidList =
+            document.getElementById("bidList");
+
+        if (!bidList) {
+            return;
+        }
+
+        bidList.innerHTML = "";
+
+        data.bids.forEach(function (bid) {
+
+            const row =
+                document.createElement("div");
+
+            row.className = "bid-row";
+
+            row.innerHTML = `
+
+                <div class="bid-user">
+
+                    <div class="avatar">
+                        ${bid.bidder_name
+                            .substring(0, 2)
+                            .toUpperCase()}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${bid.bidder_name}
+                        </strong>
+
+                        <small>
+                            ${new Date(bid.bid_time)
+                                .toLocaleString()}
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <strong class="bid-amount">
+                    ₹${Number(bid.bid_amount)
+                        .toLocaleString("en-IN")}
+                </strong>
+
+            `;
+
+            bidList.appendChild(row);
+
+        });
+
+    } catch (error) {
+
+        console.error("Bid history error:", error);
+
+    }
+}
+
+
+/* =========================
+   REAL BID FUNCTION
+========================= */
+
+async function placeBid() {
 
     const input =
         document.getElementById("bidInput");
@@ -523,70 +665,129 @@ function placeBid() {
     const amount =
         Number(input.value);
 
+    const userData =
+        localStorage.getItem("user");
 
-    if (!amount || amount <= 72500) {
+    if (!userData) {
+
+        alert("Please login before placing a bid.");
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    const user =
+        JSON.parse(userData);
+
+    const minimum =
+        Number(window.currentAuctionPrice) + 1;
+
+    if (!amount || amount < minimum) {
 
         alert(
-            "Please enter a bid higher than ₹72,500."
+            "Your bid must be higher than ₹" +
+            Number(window.currentAuctionPrice)
+                .toLocaleString("en-IN")
         );
 
         return;
-
     }
 
+    try {
 
-    const bidList =
-        document.getElementById("bidList");
+        const response = await fetch(
+            "http://localhost:5000/api/bids",
+            {
+                method: "POST",
 
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-    const newBid =
-        document.createElement("div");
+                body: JSON.stringify({
 
-    newBid.className = "bid-row";
+                    auction_id: auctionId,
 
+                    bidder_id: user.userId,
 
-    newBid.innerHTML = `
+                    bid_amount: amount
 
-        <div class="bid-user">
+                })
+            }
+        );
 
-            <div class="avatar">
-                YOU
-            </div>
+        const data =
+            await response.json();
 
-            <div>
+        if (!response.ok) {
 
-                <strong>
-                    You
-                </strong>
+            alert(
+                data.message ||
+                "Failed to place bid."
+            );
 
-                <small>
-                    Just now
-                </small>
+            return;
+        }
 
-            </div>
+        alert("Bid placed successfully! 🎉");
 
-        </div>
+        input.value = "";
 
-        <strong class="bid-amount">
-            ₹${amount.toLocaleString("en-IN")}
-        </strong>
+        window.currentAuctionPrice =
+            Number(data.currentPrice);
 
-    `;
+        const currentPrice =
+            document.querySelector(".current-price");
 
+        if (currentPrice) {
 
-    bidList.prepend(newBid);
+            currentPrice.textContent =
+                "₹" +
+                Number(data.currentPrice)
+                    .toLocaleString("en-IN");
 
+        }
 
-    alert(
-        "Bid placed successfully! 🎉"
-    );
+        const minimumBid =
+            document.querySelector(".minimum-bid");
 
+        if (minimumBid) {
 
-    input.value = "";
+            minimumBid.textContent =
+                "Minimum bid: ₹" +
+                (
+                    Number(data.currentPrice) + 1
+                ).toLocaleString("en-IN");
 
+        }
+
+        loadBids();
+
+    } catch (error) {
+
+        console.error("Bid error:", error);
+
+        alert(
+            "Cannot connect to backend. Make sure the backend is running."
+        );
+    }
 }
 
+
+/* =========================
+   START
+========================= */
+
+loadAuction();
+
 </script>
+
+</body>
+</html>
+```
+
 
 </body>
 

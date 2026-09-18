@@ -612,11 +612,137 @@
     </p>
 
 </footer>
-
-
 <script src="js/script.js"></script>
 
 <script>
+
+/* =========================
+   LOAD REAL AUCTIONS
+========================= */
+
+async function loadAuctions() {
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/auctions"
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Failed to load auctions.");
+            return;
+        }
+
+        const auctions = data.auctions;
+
+        const container =
+            document.getElementById("auctionGrid");
+
+        if (!container) {
+            console.error("Auction grid not found.");
+            return;
+        }
+
+        // Remove demo cards
+        container.innerHTML = "";
+
+        if (auctions.length === 0) {
+
+            document.getElementById("noResults").style.display =
+                "block";
+
+            return;
+        }
+
+        auctions.forEach(function (auction) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "auction-card auction-item";
+
+            card.dataset.name =
+                auction.product_name.toLowerCase();
+
+            card.dataset.category =
+                (auction.category || "").toLowerCase();
+
+            card.innerHTML = `
+
+                <div class="card-image">
+
+                    <span class="live-badge">
+                        <span class="live-dot"></span>
+                        LIVE
+                    </span>
+
+                    <div class="product-emoji">
+                        📦
+                    </div>
+
+                </div>
+
+                <div class="card-content">
+
+                    <span class="category">
+                        ${(auction.category || "OTHER").toUpperCase()}
+                    </span>
+
+                    <h3>
+                        ${auction.product_name}
+                    </h3>
+
+                    <div class="card-bottom">
+
+                        <div>
+
+                            <small>
+                                Current Bid
+                            </small>
+
+                            <strong>
+                                ₹${Number(auction.current_price)
+                                    .toLocaleString("en-IN")}
+                            </strong>
+
+                        </div>
+
+                        <div class="time">
+                            Live
+                        </div>
+
+                    </div>
+
+                    <a
+                        href="auction-details.html?id=${auction.auction_id}"
+                        class="card-btn"
+                    >
+                        View Auction →
+                    </a>
+
+                </div>
+
+            `;
+
+            container.appendChild(card);
+
+        });
+
+        updateAuctionCount(auctions.length);
+
+    } catch (error) {
+
+        console.error("Auction loading error:", error);
+
+        alert(
+            "Cannot connect to backend. Make sure the backend is running."
+        );
+    }
+}
+
 
 /* =========================
    SEARCH AUCTIONS
@@ -638,7 +764,7 @@ function searchAuctions() {
     cards.forEach(card => {
 
         const name =
-            card.dataset.name.toLowerCase();
+            card.dataset.name || "";
 
         if (name.includes(search)) {
 
@@ -668,7 +794,8 @@ function filterAuctions() {
     const category =
         document
         .getElementById("categoryFilter")
-        .value;
+        .value
+        .toLowerCase();
 
     const cards =
         document.querySelectorAll(".auction-item");
@@ -678,7 +805,7 @@ function filterAuctions() {
     cards.forEach(card => {
 
         const cardCategory =
-            card.dataset.category;
+            card.dataset.category || "";
 
         if (
             category === "all" ||
@@ -700,6 +827,32 @@ function filterAuctions() {
     document.getElementById("noResults").style.display =
         visible === 0 ? "block" : "none";
 }
+
+
+/* =========================
+   UPDATE AUCTION COUNT
+========================= */
+
+function updateAuctionCount(count) {
+
+    const resultsText =
+        document.querySelector(".results-row p");
+
+    if (resultsText) {
+
+        resultsText.innerHTML =
+            `<strong>${count}</strong> live auctions available`;
+
+    }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadAuctions();
 
 </script>
 

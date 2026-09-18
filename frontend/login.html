@@ -348,32 +348,34 @@
 
                     // Get user information
 
-                    const user =
-                        data.user;
+                    const user = data.user;
 
+// Save complete user information
+localStorage.setItem(
+    "user",
+    JSON.stringify(user)
+);
 
-                    // Save user information
+// Also save individual values
+localStorage.setItem(
+    "userId",
+    user.userId
+);
 
-                    localStorage.setItem(
-                        "userId",
-                        user.userId
-                    );
+localStorage.setItem(
+    "userName",
+    user.name
+);
 
-                    localStorage.setItem(
-                        "userName",
-                        user.name
-                    );
+localStorage.setItem(
+    "userEmail",
+    user.email
+);
 
-                    localStorage.setItem(
-                        "userEmail",
-                        user.email
-                    );
-
-                    localStorage.setItem(
-                        "userRole",
-                        user.role
-                    );
-
+localStorage.setItem(
+    "userRole",
+    user.role
+);
 
                     // =================================
                     // REDIRECT BASED ON ROLE

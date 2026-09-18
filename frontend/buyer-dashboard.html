@@ -933,11 +933,14 @@
     <script>
 
         // Get the registered user's information
-        const savedName =
-            localStorage.getItem("userName");
+        const user = JSON.parse(localStorage.getItem("user"));
 
-        const savedRole =
-            localStorage.getItem("userRole");
+if (user) {
+    document.getElementById("userName").textContent = user.name;
+    document.getElementById("navUserName").textContent = user.name;
+    document.getElementById("navAvatar").textContent =
+        user.name.charAt(0).toUpperCase();
+}
 
 
         // Update dashboard name
