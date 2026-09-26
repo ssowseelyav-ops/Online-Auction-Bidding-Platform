@@ -613,6 +613,19 @@
                      * in the browser.
                      */
 
+                    const normalizedRole = String(role).toUpperCase();
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify({
+                            userId: data.userId,
+                            name: name,
+                            email: email,
+                            phone: phone,
+                            role: normalizedRole
+                        })
+                    );
+
                     localStorage.setItem(
                         "userName",
                         name
@@ -620,7 +633,7 @@
 
                     localStorage.setItem(
                         "userRole",
-                        role
+                        normalizedRole
                     );
 
                     localStorage.setItem(
@@ -628,6 +641,10 @@
                         data.userId
                     );
 
+                    localStorage.setItem(
+                        "userEmail",
+                        email
+                    );
 
                     console.log(
                         "User saved:",
@@ -644,7 +661,7 @@
 
                     // Redirect according to role
 
-                    if (role === "BUYER") {
+                    if (normalizedRole === "BUYER") {
 
                         window.location.href =
                             "buyer-dashboard.html";

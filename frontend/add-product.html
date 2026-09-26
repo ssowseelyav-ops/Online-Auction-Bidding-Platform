@@ -468,16 +468,9 @@
         // CHECK SELLER LOGIN
         // ========================================
 
-        const sellerId =
-            localStorage.getItem(
-                "userId"
-            );
-
-        const userRole =
-            localStorage.getItem(
-                "userRole"
-            );
-
+        const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+        const sellerId = storedUser?.userId || localStorage.getItem("userId");
+        const userRole = String(storedUser?.role || localStorage.getItem("userRole") || "").toUpperCase();
 
         if (!sellerId || userRole !== "SELLER") {
 

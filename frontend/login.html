@@ -349,33 +349,39 @@
                     // Get user information
 
                     const user = data.user;
+                    const normalizedRole = String(user.role || "").toUpperCase();
 
-// Save complete user information
-localStorage.setItem(
-    "user",
-    JSON.stringify(user)
-);
+                    // Save complete user information
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify({
+                            userId: user.userId,
+                            name: user.name,
+                            email: user.email,
+                            role: normalizedRole
+                        })
+                    );
 
-// Also save individual values
-localStorage.setItem(
-    "userId",
-    user.userId
-);
+                    // Also save individual values
+                    localStorage.setItem(
+                        "userId",
+                        user.userId
+                    );
 
-localStorage.setItem(
-    "userName",
-    user.name
-);
+                    localStorage.setItem(
+                        "userName",
+                        user.name
+                    );
 
-localStorage.setItem(
-    "userEmail",
-    user.email
-);
+                    localStorage.setItem(
+                        "userEmail",
+                        user.email
+                    );
 
-localStorage.setItem(
-    "userRole",
-    user.role
-);
+                    localStorage.setItem(
+                        "userRole",
+                        normalizedRole
+                    );
 
                     // =================================
                     // REDIRECT BASED ON ROLE
@@ -385,7 +391,7 @@ localStorage.setItem(
                         function () {
 
                             if (
-                                user.role ===
+                                normalizedRole ===
                                 "SELLER"
                             ) {
 

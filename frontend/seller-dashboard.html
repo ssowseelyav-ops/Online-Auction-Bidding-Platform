@@ -934,17 +934,26 @@
         // GET LOGGED-IN USER
         // ========================================
 
+        const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+
         const savedName =
+            storedUser?.name ||
             localStorage.getItem(
                 "userName"
-            );
+            ) ||
+            "User";
 
         const savedRole =
-            localStorage.getItem(
-                "userRole"
-            );
+            String(
+                storedUser?.role ||
+                localStorage.getItem(
+                    "userRole"
+                ) ||
+                ""
+            ).toUpperCase();
 
         const savedUserId =
+            storedUser?.userId ||
             localStorage.getItem(
                 "userId"
             );
@@ -1069,6 +1078,10 @@
 
 
                 // Remove login information
+
+                localStorage.removeItem(
+                    "user"
+                );
 
                 localStorage.removeItem(
                     "userId"

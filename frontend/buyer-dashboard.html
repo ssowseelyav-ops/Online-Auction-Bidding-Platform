@@ -932,38 +932,13 @@
 
     <script>
 
-        // Get the registered user's information
-        const user = JSON.parse(localStorage.getItem("user"));
+        const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+        const userName = storedUser?.name || localStorage.getItem("userName") || "User";
 
-if (user) {
-    document.getElementById("userName").textContent = user.name;
-    document.getElementById("navUserName").textContent = user.name;
-    document.getElementById("navAvatar").textContent =
-        user.name.charAt(0).toUpperCase();
-}
-
-
-        // Update dashboard name
-        if (savedName) {
-
-            document.getElementById(
-                "userName"
-            ).textContent = savedName;
-
-
-            document.getElementById(
-                "navUserName"
-            ).textContent = savedName;
-
-
-            // First letter for avatar
-            document.getElementById(
-                "navAvatar"
-            ).textContent =
-                savedName
-                    .charAt(0)
-                    .toUpperCase();
-
+        if (userName) {
+            document.getElementById("userName").textContent = userName;
+            document.getElementById("navUserName").textContent = userName;
+            document.getElementById("navAvatar").textContent = userName.charAt(0).toUpperCase();
         }
 
     </script>
